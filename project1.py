@@ -14,6 +14,7 @@ from Email import *
 from speakFun import *
 from wishFun import *
 from commandFromAudio import *
+from battery import *
 
 if __name__ == "__main__":
     WishMe()
@@ -75,7 +76,7 @@ if __name__ == "__main__":
                 print(e)
                 speak("Sorry Cant send Email now")
                 
-        elif 'shut down' or 'shutdown' in query:
+        elif 'shut down' in query:
             speak("Are you sure that you want to shut down your PC? Say only YES or NO")
             confirmation = takeCommand().lower()
             if confirmation != 'yes':
@@ -96,9 +97,18 @@ if __name__ == "__main__":
         elif query=='':
             count=count+1
             speak("I am not getting any response from your side . Say Bye to exit")
-
+        elif 'battery' in query:
+            speak("sure")
+            batteryLife()
+        elif 'memory' in query:
+            speak("sure")
+            memory()
+        elif 'network' in query:
+            ip()
+            
         else:
             speak("I cant answer your query right now")
+
 
         if (count>=3):
             speak("Okay Bye for now ")
