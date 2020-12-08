@@ -8,16 +8,17 @@ This is a sound Assistant Bot. Following Functionalities are added-
 5. Open music(spotify app)
 6. Prepare Codeforces contest(open codeforces ad an online ide)
 7. Change Speaker
-8. Shut down and Restart
+8. Shut down and Restart.
+9. Battery live status.
+10. IP address of current network.
+11. Real time Memory details. 
 
 To be added -
 1. Alarm setting. 
-2. Tell Battery life.
-3. Accessing Map
-4. Current IP and Mac Address
-5. Temperature and weather of particular city
-6. Upload on google drive
-7. Pdf to doc online converter automate
-8. Book reading with time estimation
-9. Game
-10. Photo click
+2. Accessing Map
+3. Temperature and weather of particular city
+4. Upload on google drive
+5. Pdf to doc online converter automate
+6. Book reading with time estimation
+7. Game
+8. Photo click
