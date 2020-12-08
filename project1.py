@@ -7,68 +7,13 @@ import wikipedia
 import webbrowser
 import smtplib
 import datetime
-import speech_recognition as sr
 import datetime
 import random
 from tkinter import *
-
-engine = pyttsx3.init()
-voices=engine.getProperty('voices')
-#print(voices[0])
-engine.setProperty('voice',voices[0].id)
-
-def WishMe():
-    ''' Wish according to datetime'''
-    hour= int(datetime.datetime.now().hour)
-    if (hour>=0 and hour<12):
-        speak("Good Morning !!")
-    elif (hour>=12 and hour<18):
-        speak("Good Afternoon !!")
-    else:
-        speak("Good Evening !!")
-
-    speak("May I help you ?")
-
-
-
-def takeCommand():
-    '''Microphone input to string output'''
-    r=sr.Recognizer()
-    with sr.Microphone() as source:
-        print("Listening.........")
-        r.pause_threshold =1
-        audio= r.listen(source)
-
-    try:
-        print("Recognizing ...")
-        query =r.recognize_google(audio,language="en-in")
-        print("user said -",query)
-        return query
-
-    except Exception as e:
-        print(e)
-        print("Say that again please...")
-        speak("Say that again please...")
-        return("none")
-
-def speak(audio):
-    '''speak audio'''
-    engine.say(audio)
-    engine.runAndWait()
-    pass
-
-def SendEmail(to,content):
-    server =smtplib.SMTP('smtp.gmail.com',587) #587 is port
-    server.ehlo()
-    server.starttls()
-
-    file1 = open("pass.txt", "r")
-    password=file1.readline() # save your email ids password in a txt file named pass.txt
-    id='adarshagrawal4@gmail.com' # my email id change accordingly
-    server.login(id,password)
-    server.sendmail(id,to,content)
-    server.close()
-    file1.close()
+from Email import *
+from speakFun import *
+from wishFun import *
+from commandFromAudio import *
 
 if __name__ == "__main__":
     WishMe()
@@ -76,14 +21,16 @@ if __name__ == "__main__":
     while True:
         query=takeCommand().lower()
         #logic for executing task--
+
         if 'wikipedia' in query:
+            query = query.replace('wikipedia', '')
             speak('Searching'+query+'in wikipedia')
-            query=query.replace('wikipedia','')
             results = wikipedia.summary(query,sentences=2)
             speak("According to wikipedia")
             speak(results)
+
         elif 'change speaker' in query:
-            speak("Sure Nice to have you")
+            speak("Sure Nice to have you I am going for now!")
             i=random.randint(0,40)
             engine.setProperty('voice', voices[i].id)
             speak("Changed speaker successfully"+"I am "+ voices[i].name +" Nice to meet you !")
@@ -107,12 +54,12 @@ if __name__ == "__main__":
 
         elif 'music' in query:
             speak("Sure")
-            url="//Applications"
             os.system("open //Applications//Spotify.app")
 
         elif ('bye' in query) or ('thank' in query):
             speak('okay Bye')
             break
+
         elif 'email' in query:
             #email ids of targets stored in dictionary--
             d={'adarsh':"adarsh.adarsh.agrawal@gmail.com",'divya':"divyaagrawal8484@gmail.com"}
@@ -122,7 +69,7 @@ if __name__ == "__main__":
                 to = d[name]
                 speak("What to write in Email ?")
                 content =takeCommand()
-                SendEmail(to,content)
+                SendEmail(to,content) #function declared in new file
                 speak("Email has been sent")
             except Exception as e:
                 print(e)
