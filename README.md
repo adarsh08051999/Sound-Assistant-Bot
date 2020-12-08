@@ -8,9 +8,8 @@ This is a sound Assistant Bot. Following Functionalities are added-
 5. Open music(spotify app)
 6. Prepare Codeforces contest(open codeforces ad an online ide)
 7. Change Speaker
+8. Shut down and Restart
 
 To be added -
-1. Alarm setting
-2. Shut down 
-and many more
- Thanks a lot
+1. Alarm setting 
+2.Tell Battery life.
